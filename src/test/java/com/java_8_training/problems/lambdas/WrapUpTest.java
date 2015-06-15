@@ -16,7 +16,7 @@ public class WrapUpTest {
     @Test
     public void hiddenFiles() {
         // TODO: find hidden files, tip: mainDirectory.listFiles();
-        File[] files = mainDirectory.listFiles(a -> a.getName().startsWith("."));
+        File[] files = mainDirectory.listFiles(File::isHidden);
         assertEquals(2, files.length);
     }
 
