@@ -4,6 +4,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -15,14 +16,14 @@ public class WrapUpTest {
     @Test
     public void hiddenFiles() {
         // TODO: find hidden files, tip: mainDirectory.listFiles();
-        File[] files = null;
-        assertEquals(3, files.length);
+        File[] files = mainDirectory.listFiles(a -> a.getName().startsWith("."));
+        assertEquals(2, files.length);
     }
 
     @Test
     public void xmlFiles() {
         // TODO: Find XML files,
-        File[] files = null;
+        File[] files = mainDirectory.listFiles(a -> a.getName().endsWith(".xml"));;
         assertEquals(1, files.length);
     }
 }
