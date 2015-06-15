@@ -19,7 +19,7 @@ public class MapExerciseTest {
     public void doubleNumbers() {
         Stream<Integer> input = Stream.of(0, 1, 2, 3, 4, 5);
 
-        List<Integer> doubleNumbers = new ArrayList<>();
+        List<Integer> doubleNumbers = input.map(i -> i * 2).collect(toList());
 
         assertThat(doubleNumbers, is(Arrays.asList(0, 2, 4, 6, 8, 10)));
     }
