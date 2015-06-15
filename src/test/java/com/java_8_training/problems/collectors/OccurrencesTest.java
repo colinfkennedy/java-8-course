@@ -19,7 +19,8 @@ public class OccurrencesTest {
     public void occurrencesForAWord() {
         String word = "cool";
 
-        Map<String, Long> occ = null;
+        Map<String, Long> occ = Arrays.stream(word.split(""))
+            .collect(groupingBy(identity(), counting()));
 
         assertEquals(2, (long) occ.get("o"));
         assertEquals(1, (long) occ.get("c"));
@@ -32,7 +33,10 @@ public class OccurrencesTest {
     public void occurrencesForAListOfSentences() {
         List<String> sentences = Arrays.asList("Hello everyone!", "Java 8 is here!");
 
-        Map<String, Long> occ = null;
+        Map<String, Long> occ = sentences.stream()
+            .map(w -> w.split(""))
+            .flatMap(Arrays::stream)
+            .collect(groupingBy(identity(), counting()));;
 
         assertEquals(2, (long) occ.get("l"));
         assertEquals(4, (long) occ.get(" "));
