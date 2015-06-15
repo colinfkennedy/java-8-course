@@ -19,7 +19,8 @@ public class PartitioningAndGroupingTest {
     // Partition the menu with dishes > 380
     @Test
     public void partitionDishes() {
-        Map<Boolean, List<Dish>> partitionedDishes = null;
+        Map<Boolean, List<Dish>> partitionedDishes = Dish.menu.stream()
+            .collect(partitioningBy(dish -> dish.getCalories() > 380));
 
         assertEquals(2, partitionedDishes.get(false).size());
         assertEquals(7, partitionedDishes.get(true).size());
@@ -28,7 +29,8 @@ public class PartitioningAndGroupingTest {
     // Group the list of dishes by caloric level
     @Test
     public void groupDishes() {
-        Map<CaloricLevel, List<Dish>> groupedDishes = null;
+        Map<CaloricLevel, List<Dish>> groupedDishes = Dish.menu.stream()
+            .collect(groupingBy(this::getCaloricLevel));
 
         assertEquals(4, groupedDishes.get(CaloricLevel.DIET).size());
         assertEquals(4, groupedDishes.get(CaloricLevel.NORMAL).size());
