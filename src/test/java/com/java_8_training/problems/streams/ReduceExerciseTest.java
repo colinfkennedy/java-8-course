@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.stream.Stream;
 
+import static org.hamcrest.Matchers.comparesEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -15,7 +16,7 @@ public class ReduceExerciseTest {
         Stream<Integer> input = Stream.of(5, 2, 200, 33, 150, 0);
 
         // TODO: find the lowest number in the stream
-        int min = -1;
+        int min = input.min(Integer::compare).get();
 
         assertThat(min, is(0));
     }
