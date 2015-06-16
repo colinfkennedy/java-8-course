@@ -5,6 +5,9 @@ package com.java_8_training.problems.defaultmethods;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 //TODO Remove this ignore and fix the tests below
@@ -16,8 +19,8 @@ public class DefaultMethodsLabTest {
     public void static_method_can_add_two_simple_number_classes_values_together() {
         SimpleNumberOp lhs = new SimpleNumberOpImpl(16);
         SimpleNumberOp rhs = new SimpleNumberOpImpl(10);
-        // assertEquals(26, SimpleNumberOp.add(lhs, rhs));
-        fail("Uncomment the line above and make the test pass.");
+        assertEquals(26, SimpleNumberOp.add(lhs, rhs));
+//        fail("Uncomment the line above and make the test pass.");
     }
 
     /*TODO Part 2. Add a default method to existing interface SimpleNumberOp for getValueAsDouble that returns a double,
@@ -26,8 +29,8 @@ public class DefaultMethodsLabTest {
     @Test(expected = UnsupportedOperationException.class)
     public void add_default_method_to_return_value_as_double_but_throws_an_exception() {
         SimpleNumberOp lhs = new SimpleNumberOpImpl(15);
-        // lhs.getValueAsDouble();
-        fail("Uncomment the line above and make the test pass.");
+        lhs.getValueAsDouble();
+//        fail("Uncomment the line above and make the test pass.");
     }
 
     //Note that we didn't have to change the Impl class.
@@ -38,7 +41,16 @@ public class DefaultMethodsLabTest {
         //1. Create a class called ABBA that implements both A and B
 
         //2. Initialise the class here and assert that Hello A is what is returned.
-        fail("Check you work by ensuring 'Hello A' is returned");
+        ABBA abba = new ABBA();
+        assertThat(abba.printHello(), is("Hello A"));
+//        fail("Check you work by ensuring 'Hello A' is returned");
+    }
+
+    public class ABBA implements A, B {
+        @Override
+        public String printHello() {
+            return A.super.printHello();
+        }
     }
 
 }
