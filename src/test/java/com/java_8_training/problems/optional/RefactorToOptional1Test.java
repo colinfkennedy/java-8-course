@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Optional;
 import java.util.Properties;
 
 import static junit.framework.Assert.assertEquals;
@@ -31,7 +32,6 @@ public class RefactorToOptional1Test
     }
 
     //TODO: your task is to fix this test by implementing readDurationWithOptional
-    @Ignore
     @Test
     public void parsingPropertyWithOptional(){
         assertEquals(10, readDurationWithOptional(properties, "eating"));
@@ -54,8 +54,9 @@ public class RefactorToOptional1Test
 
     //TODO: use Optional to reactor the method readDuration
     public int readDurationWithOptional(Properties props, String name) {
-        return 0;
+        return Optional.ofNullable(props.getProperty(name))
+                        .map(Integer::parseInt)
+                        .filter(x -> x > 0)
+                        .orElse(0);
     }
-
-
 }
