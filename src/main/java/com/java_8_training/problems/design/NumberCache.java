@@ -22,13 +22,10 @@ public class NumberCache {
     }
 
     public void initialize(String file) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            // Get a stream of all the lines from the buffered reader
-            reader.lines()
-            // Initialize the cache with them
-                  .map(Integer::parseInt)
-                  .forEach(this::cacheBinaryString);
-        }
+        LinesProcessor.processFile(file, (lines) ->
+            lines.map(Integer::parseInt)
+                .forEach(this::cacheBinaryString)
+        );
     }
 
     private void cacheBinaryString(int number) {
